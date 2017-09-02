@@ -1,13 +1,72 @@
 import React from 'react';
-import { AppRegistry,StyleSheet, View } from 'react-native';
+import {
+  AppRegistry,
+  StyleSheet, 
+  View,
+  Text,
+  Platform,
+  TextInput,
+  Button,
+  ScrollView,
+  Dimensions,
+  ListView,
+  Alert,
+  TouchableHighlight,
+  StatusBar
+  } from 'react-native';
 
 export default class FlexBox extends React.Component {
+  constructor (props){
+    super(props);
+    const ds = new ListView.DataSource({
+      rowHasChanged:(r1,r2)=> r1 !== r2
+    });
+    this.state = {
+      currentPage:0,
+      dataSource:ds.cloneWithRows([
+        '商品1',
+        '商品2',
+        '商品3',
+        '商品4',
+        '商品5',
+        '商品6',
+        '商品7',
+        '商品8',
+        '商品9',
+        '商品10',
+      ])
+    }
+  }
   render() {
     return (
       <View style={styles.container}>
-        <View style={styles.view1} />
-        <View style={styles.view2}/>
-      </View>
+        <StatusBar
+          backgroundColor={'blue'}
+          barStyle={'default'}
+          networkActivityIndicatorVisible={true}
+        />
+        <View style={styles.searchbar}>
+          <TextInput
+            style={styles.input}
+            placeholder='搜索商品'/>
+          <Button style={styles.button}
+            title='搜索'
+            onPress={()=> Alert.alert('你点击了搜索按钮',null,null)}
+          />
+        </View>
+        <View style={styles.advertisement}>
+          <ScrollView
+            ref='scrollView'
+            horizontal={true}
+            showsHorizontalScrollIndicator={false}
+            pagingEnabled={true}
+          >
+            <TouchableHighlight onPress={() => Alert.alert('你点击了轮播图',null,null)}>
+
+            </TouchableHighlight>
+          </ScrollView>
+
+        </View>
 
     );
   }
