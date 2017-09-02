@@ -14,7 +14,7 @@ import {
   StatusBar,
   } from 'react-native';
 
-export default class FlexBox extends React.Component {
+export default class App extends React.Component {
   constructor (props){
     super(props);
     const ds = new ListView.DataSource({
@@ -43,7 +43,7 @@ export default class FlexBox extends React.Component {
     clearInterval(this.interval)
   }
 
-  _startTimer =() =>{
+  _startTimer = () =>{
     this.interval= setInterval(()=>{
       let nextPage = this.state.currentPage + 1;
       if(nextPage >= 3){
@@ -57,7 +57,7 @@ export default class FlexBox extends React.Component {
     },2000)
   };
 
-  _renderRow =(rowData,sectionID, rowID) => {
+  _renderRow = (rowData,sectionID, rowID) => {
     return(
       <TouchableHighlight onPress={()=>Alert.alert('商品',null,null)}>
         <View style={styles.row}>
