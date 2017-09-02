@@ -1,6 +1,5 @@
 import React from 'react';
 import {
-  AppRegistry,
   StyleSheet, 
   View,
   Text,
@@ -46,7 +45,7 @@ export default class FlexBox extends React.Component {
 
   _startTimer =() =>{
     this.interval= setInterval(()=>{
-      nextPage = this.state.currentPage + 1;
+      let nextPage = this.state.currentPage + 1;
       if(nextPage >= 3){
         nextPage = 0;
       }
