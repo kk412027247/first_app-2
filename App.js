@@ -61,7 +61,7 @@ export default class FlexBox extends React.Component {
     return(
       <TouchableHighlight onPress={()=>Alert.alert('商品',null,null)}>
         <View style={styles.row}>
-          <Text>{rowData}</Text>
+          <Text id={rowID+sectionID}>{rowData}</Text>
         </View>
       </TouchableHighlight>
     )
