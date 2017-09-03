@@ -1,6 +1,7 @@
 {
   "expo": {
     "sdkVersion": "20.0.0",
+    "slug":"first-app",
     "ios": {
       "bundleIdentifier": "com.yourcompany.yourappname"
     },
