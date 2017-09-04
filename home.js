@@ -1,6 +1,6 @@
 import React from 'react';
 import {
-  StyleSheet, 
+  StyleSheet,
   View,
   Text,
   Platform,
@@ -14,7 +14,7 @@ import {
   StatusBar,
   Image,
   RefreshControl,
-  } from 'react-native';
+} from 'react-native';
 
 const circleSize = 8;
 const circleMargin = 5;
@@ -94,7 +94,7 @@ export default class App extends React.Component {
         },
       ],
       searchText:' ',
-      
+
     }
   }
   componentDidMount(){
@@ -123,7 +123,7 @@ export default class App extends React.Component {
       <TouchableHighlight onPress={()=>Alert.alert(rowData.title,null,null)}>
         <View style={styles.row} key={sectionID+rowID}>
           <Image source={rowData.image} style={styles.productImage}/>
-          <View style = {styles.productText}> 
+          <View style = {styles.productText}>
             <Text style={styles.productTitle}>{rowData.title}</Text>
             <Text style={styles.productSubTitle}>{rowData.subTitle}</Text>
           </View>
@@ -141,10 +141,10 @@ export default class App extends React.Component {
   _onRefresh = ()=>{
     this.setState({isRefreshing:true});//设置为正在刷新状态
     const products= Array.from(new Array(10)).map((value,index)=>({ //Array.from 将返回出来的对象，组合成一个新的数组
-       image:require('./image/2.jpg'),
-       title:'新商品'+(index+1),
-       subTitle:'新商品描述'+(index+1),
-       }));
+      image:require('./image/2.jpg'),
+      title:'新商品'+(index+1),
+      subTitle:'新商品描述'+(index+1),
+    }));
     setTimeout(()=>{
       this.setState({
         isRefreshing:false,
@@ -170,51 +170,51 @@ export default class App extends React.Component {
     const indicatorWidth = circleSize * advertisementCount + circleMargin * advertisementCount *2;
     const left = (Dimensions.get('window').width - indicatorWidth) / 2 ;
     return (
-       <View style={styles.container}>
-         <StatusBar backgroundColor={'blue'}
-          barStyle={'default'}
-          networkActivityIndicatorVisible={true}
-         />
-         <View style = {styles.searchbar}>
-           <TextInput style={styles.input} placeholder='搜索商品' onChangeText={(text)=>{
-             this.setState({searchText:text});
-             console.log(text)
-           }}/>
-           <Button style={styles.button} title='搜索' onPress={()=>Alert.alert('搜索'+this.state.searchText,null,null)}/>
-         </View>
-         <View style={styles.advertisement}>
-           <ScrollView
+      <View style={styles.container}>
+        <StatusBar backgroundColor={'blue'}
+                   barStyle={'default'}
+                   networkActivityIndicatorVisible={true}
+        />
+        <View style = {styles.searchbar}>
+          <TextInput style={styles.input} placeholder='搜索商品' onChangeText={(text)=>{
+            this.setState({searchText:text});
+            console.log(text)
+          }}/>
+          <Button style={styles.button} title='搜索' onPress={()=>Alert.alert('搜索'+this.state.searchText,null,null)}/>
+        </View>
+        <View style={styles.advertisement}>
+          <ScrollView
             ref='scrollView'
             horizontal={true} //设置滚动方向为横向，默认为纵向
             showsHorizontalScrollIndicator={false}   //是否现实滚动条
             pagingEnabled={true}  //分页
-           >
-             {this.state.advertisements.map((advertisement,index)=>{
-               return(
-                 <TouchableHighlight key={index} onPress={()=>Alert.alert(advertisement.title,null,null)}>
-                   <Image style={styles.advertisementContent} source={advertisement.image} />
-                 </TouchableHighlight>
-               )
+          >
+            {this.state.advertisements.map((advertisement,index)=>{
+              return(
+                <TouchableHighlight key={index} onPress={()=>Alert.alert(advertisement.title,null,null)}>
+                  <Image style={styles.advertisementContent} source={advertisement.image} />
+                </TouchableHighlight>
+              )
 
-             })}
-           </ScrollView>
-           <View style={[styles.indicator,{left:left}]}>
-             {this.state.advertisements.map((advertisement,index)=>{
-               return(
-                 <View key ={index} style={(index===this.state.currentPage)? styles.circleSelected: styles.circle}/>
-               )
-             })}
-           </View>
-         </View>
-         <View style={styles.products}>
-           <ListView
-             dataSource={this.state.dataSource} //数据源
-             renderRow={this._renderRow}  //显示组件
-             renderSeparator={this._renderSeparator}  //下划线，和br差不多意思的东西
-             refreshControl={this._renderRefreshControl()} //下啦刷新设置 ,这里不是事件出发，家在组建直接执行一次。
-           />
-         </View>
-       </View>
+            })}
+          </ScrollView>
+          <View style={[styles.indicator,{left:left}]}>
+            {this.state.advertisements.map((advertisement,index)=>{
+              return(
+                <View key ={index} style={(index===this.state.currentPage)? styles.circleSelected: styles.circle}/>
+              )
+            })}
+          </View>
+        </View>
+        <View style={styles.products}>
+          <ListView
+            dataSource={this.state.dataSource} //数据源
+            renderRow={this._renderRow}  //显示组件
+            renderSeparator={this._renderSeparator}  //下划线，和br差不多意思的东西
+            refreshControl={this._renderRefreshControl()} //下啦刷新设置 ,这里不是事件出发，家在组建直接执行一次。
+          />
+        </View>
+      </View>
     );
   }
 }
