@@ -1,0 +1,29 @@
+dependencies: \
+  /Users/tmd/first_app-2/node_modules/react-native/React/DevSupport/RCTPackagerConnection.m \
+  /Users/tmd/first_app-2/node_modules/react-native/React/DevSupport/RCTPackagerConnection.h \
+  /Users/tmd/first_app-2/node_modules/react-native/React/Base/RCTDefines.h \
+  /Users/tmd/first_app-2/node_modules/react-native/React/Base/RCTAssert.h \
+  /Users/tmd/first_app-2/node_modules/react-native/React/Base/RCTBridge.h \
+  /Users/tmd/first_app-2/node_modules/react-native/React/Base/RCTBridgeDelegate.h \
+  /Users/tmd/first_app-2/node_modules/react-native/React/Base/RCTJavaScriptLoader.h \
+  /Users/tmd/first_app-2/node_modules/react-native/React/Base/RCTBridgeModule.h \
+  /Users/tmd/first_app-2/node_modules/react-native/React/Base/RCTFrameUpdate.h \
+  /Users/tmd/first_app-2/node_modules/react-native/React/Base/RCTInvalidating.h \
+  /Users/tmd/first_app-2/node_modules/react-native/React/Base/RCTConvert.h \
+  /Users/tmd/first_app-2/node_modules/react-native/React/Views/RCTAnimationType.h \
+  /Users/tmd/first_app-2/node_modules/react-native/React/Views/RCTBorderStyle.h \
+  /Users/tmd/first_app-2/node_modules/react-native/React/Base/RCTLog.h \
+  /Users/tmd/first_app-2/node_modules/react-native/React/Base/RCTUtils.h \
+  /Users/tmd/first_app-2/node_modules/react-native/React/Views/RCTPointerEvents.h \
+  /Users/tmd/first_app-2/node_modules/react-native/React/Views/RCTTextDecorationLineType.h \
+  /Users/tmd/first_app-2/ios/build/Build/Products/Debug-iphonesimulator/include/yoga/Yoga.h \
+  /Users/tmd/first_app-2/ios/build/Build/Products/Debug-iphonesimulator/include/yoga/YGEnums.h \
+  /Users/tmd/first_app-2/ios/build/Build/Products/Debug-iphonesimulator/include/yoga/YGMacros.h \
+  /Users/tmd/first_app-2/node_modules/react-native/React/../Libraries/WebSocket/RCTReconnectingWebSocket.h \
+  /Users/tmd/first_app-2/node_modules/react-native/React/../Libraries/WebSocket/RCTSRWebSocket.h \
+  /Users/tmd/first_app-2/node_modules/react-native/React/Base/RCTWebSocketObserverProtocol.h \
+  /Users/tmd/first_app-2/node_modules/react-native/React/DevSupport/RCTPackagerConnectionBridgeConfig.h \
+  /Users/tmd/first_app-2/node_modules/react-native/React/DevSupport/RCTPackagerConnectionConfig.h \
+  /Users/tmd/first_app-2/node_modules/react-native/React/DevSupport/RCTReloadPackagerMethod.h \
+  /Users/tmd/first_app-2/node_modules/react-native/React/DevSupport/RCTPackagerClient.h \
+  /Users/tmd/first_app-2/node_modules/react-native/React/DevSupport/RCTSamplingProfilerPackagerMethod.h
