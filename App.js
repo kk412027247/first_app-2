@@ -29,7 +29,7 @@ export default class App extends React.Component {
       dataSource:ds.cloneWithRows([
         {
           image:require('./image/1.jpg'),
-          title:'商品1',
+          title:'商品1223',
           subTitle:'描述1'
         },{
           image:require('./image/1.jpg'),
@@ -189,7 +189,7 @@ const styles = StyleSheet.create({
     flex: 1,
   },
   searchbar:{
-    marginTop: Platform.OS === 'ios' ? 20 :25 ,
+    marginTop: Platform.OS === 'ios' ? 20 :0 ,
     height:40,
     flexDirection:'row',
   },

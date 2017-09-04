@@ -1,12 +1,14 @@
 {
   "expo": {
     "sdkVersion": "20.0.0",
-    "slug":"first-app",
+    "slug": "first-app",
     "ios": {
       "bundleIdentifier": "com.yourcompany.yourappname"
     },
     "android": {
       "package": "com.yourcompany.yourappname"
     }
-  }
+  },
+  "name": "first_app",
+  "displayName": "first_app2"
 }
