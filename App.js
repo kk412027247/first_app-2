@@ -1,7 +1,7 @@
 import React from 'react';
 //import {View} from 'react-native';
 import {Navigator} from 'react-native-deprecated-custom-components'
-import Home from './home.js';
+import Main from './main';
 
 
 export default class App extends React.Component {
@@ -9,8 +9,8 @@ export default class App extends React.Component {
     return (
       <Navigator
         initialRoute={{ //Navigator渲染第一个路由组件，也就是第一个页面，也就是home
-          name:'home',
-          component:Home,
+          name:'main',
+          component:Main,
         }}
         configrueScene={()=>{  //configrueScene定义页面跳转时候定动画
           return Navigator.SceneConfigs.FloatFromLeft;

@@ -17,7 +17,7 @@ export default class Detail extends Component {
         <Text style={styles.back}>返回</Text>
       </TouchableOpacity>
         <Text style={styles.text}>
-          详情页面
+          {this.props.productTitle}
         </Text>
       </View>
     )

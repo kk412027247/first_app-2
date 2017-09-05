@@ -127,6 +127,7 @@ export default class Home extends React.Component {
           navigator.push({//navigator.push（route）表示跳转到新的场景，
             name:'detail',
             component:Detail,
+            params:{productTitle:rowData.title} //通过params给detail组件传递prop参数,括号里面的就是参数嘛
           })
         }
       }}>
