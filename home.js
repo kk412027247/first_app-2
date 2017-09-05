@@ -1,4 +1,5 @@
 import React from 'react';
+import Detail from './detial.js'
 import {
   StyleSheet,
   View,
@@ -22,7 +23,7 @@ const ds = new ListView.DataSource({
   rowHasChanged:(r1,r2) => r1 !== r2
 });  //创建ListView。DataSource数据源 ,放在最最外层作为全局变量
 
-export default class App extends React.Component {
+export default class Home extends React.Component {
   constructor (props){
     super(props);
 
@@ -120,7 +121,15 @@ export default class App extends React.Component {
 
   _renderRow = (rowData,sectionID, rowID) => { //ListView 显示格式设置
     return(
-      <TouchableHighlight onPress={()=>Alert.alert(rowData.title,null,null)}>
+      <TouchableHighlight onPress={()=>{
+        const {navigator}=this.props; //把外面的navigator传递进来
+        if(navigator){
+          navigator.push({//navigator.push（route）表示跳转到新的场景，
+            name:'detail',
+            component:Detail,
+          })
+        }
+      }}>
         <View style={styles.row} key={sectionID+rowID}>
           <Image source={rowData.image} style={styles.productImage}/>
           <View style = {styles.productText}>
