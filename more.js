@@ -1,34 +1,12 @@
 import React,{Component} from 'react';
-import {StyleSheet , View ,Text ,Slider,ActivityIndicator,Dimensions} from 'react-native';
-import MapView from 'react-native-maps';
+import {StyleSheet , View ,Text ,Slider,ActivityIndicator,Picker} from 'react-native';
+
 export default class More extends Component {
   constructor(props){
     super(props);
     this.state={
-      isFirstLoad:true,
-      mapRegion:undefined,
-      mapRegionInput:undefined,
-      annotations:[]
+      language:'java'
     };
-    _onRegionChange=(region)=>{
-     this.stateState({mapRegionInput:region})
-    };
-    _onRegionChangeComplete=(region)=>{
-      if(this.state.isFirstLoad){
-        this.setState({
-          mapRegionInput:region,
-          annotations:this._getAnnotations(region),
-          isFirstLoad:false
-        })
-      }
-    };
-    _getAnnotations=(region)=>{
-      return[{
-        longitude:region.longitude,
-        latitude:region.latitude,
-        title:'你的位置'
-      }]
-    }
 
   }
 
@@ -36,13 +14,17 @@ export default class More extends Component {
   render(){
     return(
      <View style={styles.container}>
-       <MapView
-         style={styles.map}
-         onRegionChange={this._onRegionChange}
-         onRegionChangeComplete={this._onRegionChangeComplete}
-         region={this.state.mapRegion}
-         annotations={this.state.annotations}
-       />
+       <Picker
+        style={styles.picker}
+        selectedValue={this.state.language}
+        onValueChange={(lang)=>{
+          this.setState({language:lang})
+        }}
+       >
+         <Picker.Item label='java' value='java'/>
+         <Picker.Item label='javascript' value='javascript'/>
+
+       </Picker>
 
 
      </View>
@@ -59,8 +41,8 @@ const styles= StyleSheet.create({
    text:{
      fontSize:20
    },
-   map:{
-     width:Dimensions.get('window').width,
-     height:Dimensions.get('window').height
+   picker:{
+     width:200,
+     height:200
    }
 });
