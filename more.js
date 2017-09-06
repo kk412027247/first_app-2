@@ -1,11 +1,18 @@
 import React,{Component} from 'react';
-import {StyleSheet , View ,Text ,Slider,ActivityIndicator,Picker} from 'react-native';
+import {
+  StyleSheet ,
+  View ,
+  Text ,
+  ActivityIndicator,
+  Picker,
+  Slider,
+} from 'react-native';
 
 export default class More extends Component {
   constructor(props){
     super(props);
     this.state={
-      language:'java'
+      sliderValue:5
     };
 
   }
@@ -14,19 +21,20 @@ export default class More extends Component {
   render(){
     return(
      <View style={styles.container}>
-       <Picker
-        style={styles.picker}
-        selectedValue={this.state.language}
-        onValueChange={(lang)=>{
-          this.setState({language:lang})
-        }}
+       <Slider
+         minimumValue={0}
+         style={{width:200}}
+         step={1}
+         maximumTrackTintColor='red'
+         minimumTrackTintColor='blue'
+         maximumValue={10}
+         value={this.state.sliderValue}
+         onValueChange={(value)=>{
+           this.setState({sliderValue:value})
+         }}
        >
-         <Picker.Item label='java' value='java'/>
-         <Picker.Item label='javascript' value='javascript'/>
-
-       </Picker>
-
-
+        <Text>sliderValue:{this.state.sliderValue}</Text>
+       </Slider>
      </View>
     )
   }
