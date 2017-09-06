@@ -6,13 +6,14 @@ import {
   ActivityIndicator,
   Picker,
   Slider,
+  Switch
 } from 'react-native';
 
 export default class More extends Component {
   constructor(props){
     super(props);
     this.state={
-      sliderValue:5
+      isOn:false
     };
 
   }
@@ -21,20 +22,17 @@ export default class More extends Component {
   render(){
     return(
      <View style={styles.container}>
-       <Slider
-         minimumValue={0}
-         style={{width:200}}
-         step={1}
-         maximumTrackTintColor='red'
-         minimumTrackTintColor='blue'
-         maximumValue={10}
-         value={this.state.sliderValue}
-         onValueChange={(value)=>{
-           this.setState({sliderValue:value})
-         }}
-       >
-        <Text>sliderValue:{this.state.sliderValue}</Text>
-       </Slider>
+      <Switch
+        onTintColor='blue'             
+        thumbTintColor='green'
+        tintColor='black'
+        onValueChange={()=>{
+          this.setState({
+            isOn:!this.state.isOn
+          })
+        }}
+        value={ this.state.isOn=== true } //默认状态
+      />
      </View>
     )
   }
