@@ -6,7 +6,8 @@ import {
   ActivityIndicator,
   Picker,
   Slider,
-  Switch
+  Switch,
+  WebView
 } from 'react-native';
 
 export default class More extends Component {
@@ -22,17 +23,8 @@ export default class More extends Component {
   render(){
     return(
      <View style={styles.container}>
-      <Switch
-        onTintColor='blue'             
-        thumbTintColor='green'
-        tintColor='black'
-        onValueChange={()=>{
-          this.setState({
-            isOn:!this.state.isOn
-          })
-        }}
-        value={ this.state.isOn=== true } //默认状态
-      />
+      <WebView source={{uri:'https://sina.cn'}} style={styles.web}/>
+
      </View>
     )
   }
@@ -50,5 +42,11 @@ const styles= StyleSheet.create({
    picker:{
      width:200,
      height:200
-   }
+   },
+  web:{
+    flex:1,
+    width:200,
+    height:200
+  }
+
 });

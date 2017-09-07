@@ -1,24 +1,24 @@
 import React from 'react';
+import Swiper from 'react-native-swiper' ;
 import Detail from './detial.js'
 import {
   StyleSheet,
   View,
-  Text,
   Platform,
-  TextInput,
-  Button,
-  ScrollView,
   Dimensions,
   ListView,
   Alert,
   TouchableHighlight,
-  StatusBar,
   Image,
   RefreshControl,
-} from 'react-native';
 
-const circleSize = 8;
-const circleMargin = 5;
+} from 'react-native';
+import {
+  Header, Container, Content, InputGroup, Input, Button, Icon, Form, Item, Text, List,
+  ListItem, Thumbnail
+} from 'native-base'
+
+
 const ds = new ListView.DataSource({
   rowHasChanged:(r1,r2) => r1 !== r2
 });  //创建ListView。DataSource数据源 ,放在最最外层作为全局变量
@@ -26,12 +26,10 @@ const ds = new ListView.DataSource({
 export default class Home extends React.Component {
   constructor (props){
     super(props);
-
-
     this.state = {
       currentPage:0,
       isRefreshing:false,
-      dataSource:ds.cloneWithRows([
+      products: [
         {
           image:require('./image/1.jpg'),
           title:'商品1223',
@@ -73,7 +71,7 @@ export default class Home extends React.Component {
           title:'商品10',
           subTitle:'描述10'
         },
-      ]),
+      ],
       advertisements:[
         {
           title:'广告1',
@@ -95,50 +93,41 @@ export default class Home extends React.Component {
         },
       ],
       searchText:' ',
+      swiperShow:false,
 
     }
   }
+
   componentDidMount(){
-    this._startTimer();
-  }
-  componentWillUnMount(){
-    clearInterval(this.interval)
-  }
-
-  _startTimer = () =>{
-    this.interval= setInterval(()=>{
-      let nextPage = this.state.currentPage + 1;
-      if(nextPage >= 3){
-        nextPage = 0;
-      }
+    setTimeout(()=>{
       this.setState({
-        currentPage:nextPage
-      });
-      const offSetX = nextPage * Dimensions.get('window').width;
-      this.refs.scrollView.scrollResponderScrollTo({x:offSetX,y:0,animated:true})
-    },2000)
-  };
+        swiperShow:true
+      })
+    },0)
+  }
 
-  _renderRow = (rowData,sectionID, rowID) => { //ListView 显示格式设置
+  _renderRow = (product) => {
     return(
-      <TouchableHighlight onPress={()=>{
-        const {navigator}=this.props; //把外面的navigator传递进来
-        if(navigator){
-          navigator.push({//navigator.push（route）表示跳转到新的场景，
-            name:'detail',
-            component:Detail,
-            params:{productTitle:rowData.title} //通过params给detail组件传递prop参数,括号里面的就是参数嘛
-          })
-        }
-      }}>
-        <View style={styles.row} key={sectionID+rowID}>
-          <Image source={rowData.image} style={styles.productImage}/>
-          <View style = {styles.productText}>
-            <Text style={styles.productTitle}>{rowData.title}</Text>
-            <Text style={styles.productSubTitle}>{rowData.subTitle}</Text>
-          </View>
-        </View>
-      </TouchableHighlight>
+      <ListItem
+        button
+        onPress={()=>{
+          const{navigator}=this.props;
+          if(navigator){
+            navigator.push({
+                name:'detail',
+                component:Detail,
+                params:{
+                  productTitle:product.title
+                }
+              }
+            )
+          }
+        }}
+      >
+        <Thumbnail square size={40} source={product.image}/>
+        <Text>{product.title}</Text>
+        <Text note>{product.subTitle}</Text>
+      </ListItem>
     )
   };
 
@@ -174,145 +163,62 @@ export default class Home extends React.Component {
     )
   };
 
-
+  
   render() {
-    const advertisementCount = this.state.advertisements.length;
-    const indicatorWidth = circleSize * advertisementCount + circleMargin * advertisementCount *2;
-    const left = (Dimensions.get('window').width - indicatorWidth) / 2 ;
     return (
-      <View style={styles.container}>
-        <StatusBar backgroundColor={'blue'}
-                   barStyle={'default'}
-                   networkActivityIndicatorVisible={true}
-        />
-        <View style = {styles.searchbar}>
-          <TextInput style={styles.input} placeholder='搜索商品' onChangeText={(text)=>{
-            this.setState({searchText:text});
-            console.log(text)
-          }}/>
-          <Button style={styles.button} title='搜索' onPress={()=>Alert.alert('搜索'+this.state.searchText,null,null)}/>
-        </View>
-        <View style={styles.advertisement}>
-          <ScrollView
-            ref='scrollView'
-            horizontal={true} //设置滚动方向为横向，默认为纵向
-            showsHorizontalScrollIndicator={false}   //是否现实滚动条
-            pagingEnabled={true}  //分页
+      <Container>
+        <Header searchBar rounded>
+            <Item>
+              <Input
+                placeholder='搜索商品'
+                onChangeText={(text)=>{
+                  this.setState({searchText:text});
+                  console.log(text)
+              }}/>
+            </Item>
+          <Button
+            transparent
+            onPress={
+              ()=>Alert.alert('搜索'+this.state.searchText,null,null)
+            }
           >
-            {this.state.advertisements.map((advertisement,index)=>{
-              return(
-                <TouchableHighlight key={index} onPress={()=>Alert.alert(advertisement.title,null,null)}>
-                  <Image style={styles.advertisementContent} source={advertisement.image} />
-                </TouchableHighlight>
-              )
-
-            })}
-          </ScrollView>
-          <View style={[styles.indicator,{left:left}]}>
-            {this.state.advertisements.map((advertisement,index)=>{
-              return(
-                <View key ={index} style={(index===this.state.currentPage)? styles.circleSelected: styles.circle}/>
-              )
-            })}
-          </View>
-        </View>
-        <View style={styles.products}>
-          <ListView
-            dataSource={this.state.dataSource} //数据源
-            renderRow={this._renderRow}  //显示组件
-            renderSeparator={this._renderSeparator}  //下划线，和br差不多意思的东西
-            refreshControl={this._renderRefreshControl()} //下啦刷新设置 ,这里不是事件出发，家在组建直接执行一次。
+            <Text>搜索</Text>
+          </Button>
+        </Header>
+        <Content>
+          {this.state.swiperShow ?
+            <Swiper
+              loop={true}  //模拟循环
+              height={190}
+              autoplay={true}
+            >
+              {this.state.advertisements.map((advertisement,index)=>{
+                return(
+                  <TouchableHighlight key={index} onPress={()=>Alert.alert(advertisement.title,null,null)}>
+                    <Image style={styles.advertisementContent} source={advertisement.image} />
+                  </TouchableHighlight>
+                )
+              })}
+            </Swiper>
+            : <Text>稍后</Text>
+          }
+          <List
+            style={{marginTop:-420}}
+            dataArray={this.state.products}
+            renderRow={this._renderRow}
           />
-        </View>
-      </View>
+        </Content>
+      </Container>
     );
   }
+
 }
 
 const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-  },
-  searchbar:{
-    marginTop: Platform.OS === 'ios' ? 20 :0 ,
-    height:40,
-    flexDirection:'row',
-  },
-  input:{
-    flex:1,
-    borderColor:'gray',
-    borderWidth:2,
-    borderRadius:10,
-    marginLeft:3,
-  },
-  button:{
-    flex:1
-  },
-  advertisement:{
-    height:180,
-  },
-  products:{
-    flex:1,
-  },
-  row:{
-    height:60,
-    flexDirection:'row',
-    backgroundColor:'white',
-  },
-  productImage:{
-    marginLeft:10,
-    marginRight:10,
-    width:40,
-    height:40,
-    alignSelf:'center',
-
-  },
-  productText:{
-    flex:1,
-    marginTop:10,
-    marginBottom:10,
-  },
-  productTitle:{
-    flex:3,
-    fontSize:16,
-  },
-  productSubTitle:{
-    flex:2,
-    fontSize:14,
-    color:"gray"
-  },
+  
   advertisementContent:{
     width:Dimensions.get('window').width,
     height:180,
   },
-  indicator:{
-    position:'absolute',
-    top:160,
-    flexDirection:'row'
-  },
-  circle:{
-    width:circleSize,
-    height:circleSize,
-    borderRadius:circleSize/2,
-    backgroundColor:"gray",
-    marginHorizontal:circleMargin,
-  },
-  circleSelected:{
-    width:circleSize,
-    height:circleSize,
-    borderRadius:circleSize/2,
-    backgroundColor:'white',
-    marginHorizontal:circleMargin,
-  },
-  divider:{
-    height:1,
-    width:Dimensions.get('window').width - 10,
-    marginLeft:5,
-    marginRight:5,
-    backgroundColor:'lightgray',
-  }
-
-
-
 });
 
